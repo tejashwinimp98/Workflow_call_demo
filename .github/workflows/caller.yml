@@ -1,0 +1,21 @@
+name: Caller Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Calling-Another-Workflow:
+    uses: ./.github/workflows/setup.yml
+    with:
+      branch: "main"
+
+  New-Job:
+    runs-on: ubuntu-latest
+    needs: Calling-Another-Workflow
+
+    steps:
+      - name: Post-Calling the Workflow
+        run: echo "Resuable workflow Succeeded"
+          echo test, and deploy your project.
